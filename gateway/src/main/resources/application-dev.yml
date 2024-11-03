@@ -1,0 +1,61 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true  # Habilita a descoberta de servicos no Eureka
+          lower-case-service-id: true
+      routes:
+        - id: method_router_create
+          uri: lb://picpay
+          predicates:
+            - Method=POST
+            - Path=/account/create
+        - id: method_router_getId
+          uri: lb://picpay
+          predicates:
+            - Method=GET
+            - Path=/account/get/**
+        - id: method_router_update
+          uri: lb://picpay
+          predicates:
+            - Method=PUT
+            - Path=/account/update/**
+        - id: method_router_deposit
+          uri: lb://picpay
+          predicates:
+            - Method=PUT
+            - Path=/account/deposit
+        - id: method_router_getAll
+          uri: lb://picpay
+          predicates:
+            - Method=GET
+            - Path=/account/getall
+        - id: method_router_transfer
+          uri: lb://picpay
+          predicates:
+            - Method=POST
+            - Path=/account/transfer
+        - id: method_router_delete
+          uri: lb://picpay
+          predicates:
+            - Method=DELETE
+            - Path=/account/delete/**
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/  # URL do Eureka Server
+    registerWithEureka: true  # Registra o Gateway no Eureka
+    fetchRegistry: true  # Busca o registro dos servicos no Eureka
+  instance:
+    prefer-ip-address: false  # Prefere o nome da aplicacao em vez do IP
+    hostname: localhost

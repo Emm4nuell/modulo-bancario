@@ -1,0 +1,28 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: picpay
+  datasource:
+    url: jdbc:postgresql://postgres:5432/accounts
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update # Controle de criação e atualização de esquema (veja as observações abaixo)
+    show-sql: true # Exibir as consultas SQL no console
+    properties:
+      hibernate:
+        format_sql: true # Formatar a exibição de SQL
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eurekaserver:8761/eureka
+  instance:
+    hostname: picpay
+    instanceId: ${spring.application.name}:${spring.application.instanceId:${random.value}}
