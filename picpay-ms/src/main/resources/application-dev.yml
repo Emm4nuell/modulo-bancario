@@ -4,20 +4,20 @@ server:
 spring:
   application:
     name: picpay
-#  datasource:
-#    url: jdbc:postgresql://localhost:5433/accounts
-#    username: postgres
-#    password: postgres
-#    driver-class-name: org.postgresql.Driver
   datasource:
-    url: jdbc:h2:mem:devdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true            # Habilita o console web do H2
-      path: /h2-console         # Caminho para o console web
+    url: jdbc:postgresql://localhost:5433/accounts
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+#  datasource:
+#    url: jdbc:h2:mem:devdb
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password:
+#  h2:
+#    console:
+#      enabled: true            # Habilita o console web do H2
+#      path: /h2-console         # Caminho para o console web
   jpa:
     hibernate:
       ddl-auto: update # Controle de criação e atualização de esquema (veja as observações abaixo)
